@@ -40,10 +40,31 @@ namespace GalaxyModel
             //newPlot.DrawX();
 
             // This draws a circle, starting at zero intensity and getting brighter
-            for (double theta = 0.0; theta < 6.29; theta = theta + 0.01)
+            //for (double theta = 0.0; theta < 6.29; theta = theta + 0.01)
+            //{
+            //    newPlot.Plot(resolution / 2.0, theta, theta/6.29);
+            //}
+
+            // Function for circle of radius resolution/4
+            var thisRadius = resolution / 4.0;
+            double circ(double r, double theta)
             {
-                newPlot.Plot(resolution / 2.0, theta, theta/6.29);
+                if ((r > (thisRadius - 1.0)) && (r < (thisRadius + 1.0)))
+                {
+                    return 1.0 - Math.Abs(thisRadius - r);
+                }
+                return 0.0;
             }
+            //newPlot.PlotFunction(circ);
+
+
+            // Density function
+            var boxRadius = resolution / 2.0;
+            double density(double r, double theta)
+            {
+                return (boxRadius - r) / boxRadius;
+            }
+            newPlot.PlotFunction(density);
 
             _galaxyPlotForm.PolarPlot = newPlot;
             this.Cursor = Cursors.Default;

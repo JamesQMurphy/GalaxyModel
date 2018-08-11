@@ -30,10 +30,10 @@ namespace GalaxyModel
 
         public void Plot(double r, double theta, double intensity = 1.0)
         {
-            double cartX = r * Math.Cos(theta);
-            double cartY = r * Math.Sin(theta);
-            int x = (int)(cartX + Bitmap.Width / 2.0);
-            int y = (int)(Bitmap.Height - cartY - Bitmap.Height / 2.0);
+            double xCart = r * Math.Cos(theta);
+            double yCart = r * Math.Sin(theta);
+            int x = (int)(xCart + Bitmap.Width / 2.0);
+            int y = (int)(Bitmap.Height - yCart - Bitmap.Height / 2.0);
 
             int rgb = Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
 
@@ -42,7 +42,19 @@ namespace GalaxyModel
 
         public void PlotFunction(Func<double,double,double> f)
         {
+            for (double x = 0.0; x < Bitmap.Width; x += 0.5)
+                for (double y = 0.0; y < Bitmap.Height; y += 0.5)
+                {
+                    // first, true Cartesian
+                    double xCart = (double)x - (Bitmap.Width / 2.0);
+                    double yCart = (double)(Bitmap.Height) - (double)y - (Bitmap.Height / 2.0);
 
+                    // calculate polar coordinates
+                    double r = Math.Sqrt(xCart * xCart + yCart * yCart);
+                    double theta = Math.Atan2(yCart, xCart);
+
+                    Plot(r, theta, f(r, theta));
+                }
         }
 
         #region IDisposable Support
