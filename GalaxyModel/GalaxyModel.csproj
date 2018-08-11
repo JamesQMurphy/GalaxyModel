@@ -51,9 +51,10 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="Plot.cs">
+    <Compile Include="PlotForm.cs">
       <SubType>Form</SubType>
     </Compile>
+    <Compile Include="PolarPlot.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <EmbeddedResource Include="Form1.resx">
