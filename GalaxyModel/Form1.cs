@@ -18,7 +18,7 @@ namespace GalaxyModel
         {
             InitializeComponent();
 
-            _GenerateBitmap((int)this.numResolution.Value);
+            _GeneratePlot((int)this.numResolution.Value);
         }
 
         protected override void OnShown(EventArgs e)
@@ -29,10 +29,10 @@ namespace GalaxyModel
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            _GenerateBitmap((int)this.numResolution.Value);
+            _GeneratePlot((int)this.numResolution.Value);
         }
 
-        private void _GenerateBitmap(int resolution)
+        private void _GeneratePlot(int resolution)
         {
             this.Cursor = Cursors.WaitCursor;
 
