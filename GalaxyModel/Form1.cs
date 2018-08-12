@@ -38,30 +38,28 @@ namespace GalaxyModel
             var boxRadius = resolution / 2.0;
 
             var newPlot = new PolarPlot(boxRadius);
+            double a = Convert.ToDouble(txtA.Text);
+            double b = Convert.ToDouble(txtB.Text);
 
-            // This draws a circle, starting at zero intensity and getting brighter
-            //for (double theta = 0.0; theta < 6.29; theta = theta + 0.01)
-            //{
-            //    newPlot.Plot(resolution / 2.0, theta, theta/6.29);
-            //}
+            newPlot.PlotPolarFunction(r => Math.Log(r/a)/b);
 
             // Density function
             //newPlot.PlotPolarFunction((r,th) => {
             //    return (byte)(Math.Max(0.0, (boxRadius - r) * 256.0 / boxRadius));
             //});
 
-            double brightness = 150.0;
-            double ws = 0.3;  // amount of perturbation
-            int m = 2;    // number of spiral arms
-            double p = 20 * 180.0 / Math.PI;  // pitch angle of arms
+            //double brightness = 150.0;
+            //double ws = 0.3;  // amount of perturbation
+            //int m = 2;    // number of spiral arms
+            //double p = 20 * 180.0 / Math.PI;  // pitch angle of arms
 
-            newPlot.PlotPolarFunction((r, th) =>
-            {
-                return (byte)(
-                    brightness * Math.Exp(-r/boxRadius)
-                    * (1 + ws * Math.Sin(m*Math.Log(r)/Math.Tan(p) - m*th))
-                );
-            });
+            //newPlot.PlotPolarFunction((r, th) =>
+            //{
+            //    return (byte)(
+            //        brightness * Math.Exp(-r/boxRadius)
+            //        * (1 + ws * Math.Sin(m*Math.Log(r)/Math.Tan(p) - m*th))
+            //    );
+            //});
 
 
             //newPlot.DrawX();

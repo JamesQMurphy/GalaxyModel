@@ -66,6 +66,18 @@ namespace GalaxyModel
             SetPixel(xBitmap, yBitmap, brightness);
         }
 
+        public void PlotPolarFunction(Func<double,double> f, byte brightness = byte.MaxValue)
+        {
+            // Function is theta = f(r)
+            // go to 1.5 times r
+            double maxR = (_bitmapWidth) * 1.5;
+            double increment = 0.5;
+            for (double r = 0.0; r < maxR; r = r + increment)
+            {
+                PlotPolarPoint(r, f(r), brightness);
+            }
+        }
+
         public void PlotPolarFunction(Func<double,double,byte> f)
         {
             for (int x = 0; x < _bitmapWidth; x++)
@@ -74,17 +86,22 @@ namespace GalaxyModel
                 {
                     _BitmapToCartesian(x, y, out double xCart, out double yCart);
                     _CartesianToPolar(xCart, yCart, out double r, out double theta);
-                    SetPixel(x, y, f(r, theta));
+                    _SetPixelNoCheck(x, y, f(r, theta));
                 }
             }
         }
 
-        public void SetPixel(int x, int y, byte brightness = byte.MaxValue)
+        public bool SetPixel(int x, int y, byte brightness = byte.MaxValue)
         {
-            int idx = (_bitmapStride * y) + (BYTES_PER_PIXEL * x);
-            _byteArray[idx] = brightness;
-            _byteArray[idx+1] = brightness;
-            _byteArray[idx+2] = brightness;
+            if ((x >= 0) && (y >= 0) && (x < _bitmapWidth) && (y < _bitmapWidth))
+            {
+                _SetPixelNoCheck(x, y, brightness);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         private void _PolarToCartesian(double r, double theta, out double xCart, out double yCart)
@@ -110,6 +127,15 @@ namespace GalaxyModel
             r = Math.Sqrt(xCart * xCart + yCart * yCart);
             theta = Math.Atan2(yCart, xCart);
         }
+
+        public void _SetPixelNoCheck(int x, int y, byte brightness = byte.MaxValue)
+        {
+            int idx = (_bitmapStride * y) + (BYTES_PER_PIXEL * x);
+            _byteArray[idx] = brightness;
+            _byteArray[idx + 1] = brightness;
+            _byteArray[idx + 2] = brightness;
+        }
+
 
         #region IDisposable Support
         private bool disposedValue = false; // To detect redundant calls
