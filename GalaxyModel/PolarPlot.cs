@@ -42,7 +42,7 @@ namespace GalaxyModel
             PlotCartesian((xCart + Bitmap.Width / 2.0), (Bitmap.Height - yCart - Bitmap.Height / 2.0), intensity);
         }
 
-        public void PlotFunction(Func<double,double,double> f)
+        public void PlotPolarFunction(Func<double,double,double> f)
         {
             for (double x = 0.0; x < Bitmap.Width; x += 0.5)
                 for (double y = 0.0; y < Bitmap.Height; y += 0.5)

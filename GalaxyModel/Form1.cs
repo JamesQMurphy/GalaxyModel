@@ -64,7 +64,7 @@ namespace GalaxyModel
             {
                 return (boxRadius - r) / boxRadius;
             }
-            newPlot.PlotFunction(density);
+            newPlot.PlotPolarFunction(density);
 
             _galaxyPlotForm.PolarPlot = newPlot;
             this.Cursor = Cursors.Default;
