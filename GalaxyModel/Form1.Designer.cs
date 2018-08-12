@@ -60,7 +60,7 @@
             this.numResolution.Size = new System.Drawing.Size(61, 20);
             this.numResolution.TabIndex = 2;
             this.numResolution.Value = new decimal(new int[] {
-            100,
+            1000,
             0,
             0,
             0});

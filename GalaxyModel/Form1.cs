@@ -35,9 +35,9 @@ namespace GalaxyModel
         private void _GeneratePlot(int resolution)
         {
             this.Cursor = Cursors.WaitCursor;
+            var boxRadius = resolution / 2.0;
 
-            var newPlot = new PolarPlot(resolution / 2.0);
-            //newPlot.DrawX();
+            var newPlot = new PolarPlot(boxRadius);
 
             // This draws a circle, starting at zero intensity and getting brighter
             //for (double theta = 0.0; theta < 6.29; theta = theta + 0.01)
@@ -45,27 +45,26 @@ namespace GalaxyModel
             //    newPlot.Plot(resolution / 2.0, theta, theta/6.29);
             //}
 
-            // Function for circle of radius resolution/4
-            var thisRadius = resolution / 4.0;
-            //double circ(double r, double theta)
-            //{
-            //    if ((r > (thisRadius - 1.0)) && (r < (thisRadius + 1.0)))
-            //    {
-            //        return 1.0 - Math.Abs(thisRadius - r);
-            //    }
-            //    return 0.0;
-            //}
-            //newPlot.PlotFunction(circ);
-
-
             // Density function
-            var boxRadius = resolution / 2.0;
-            newPlot.PlotPolarFunction((r,th) => {
-                return (byte)(Math.Max(0.0, (boxRadius - r) * 256.0 / boxRadius));
+            //newPlot.PlotPolarFunction((r,th) => {
+            //    return (byte)(Math.Max(0.0, (boxRadius - r) * 256.0 / boxRadius));
+            //});
+
+            double brightness = 150.0;
+            double ws = 0.3;  // amount of perturbation
+            int m = 2;    // number of spiral arms
+            double p = 20 * 180.0 / Math.PI;  // pitch angle of arms
+
+            newPlot.PlotPolarFunction((r, th) =>
+            {
+                return (byte)(
+                    brightness * Math.Exp(-r/boxRadius)
+                    * (1 + ws * Math.Sin(m*Math.Log(r)/Math.Tan(p) - m*th))
+                );
             });
 
 
-            newPlot.DrawX();
+            //newPlot.DrawX();
 
             _galaxyPlotForm.Bitmap = newPlot.GenerateBitmap();
             this.Cursor = Cursors.Default;
