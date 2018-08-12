@@ -28,16 +28,18 @@ namespace GalaxyModel
             }
         }
 
-        public void Plot(double r, double theta, double intensity = 1.0)
+        public void PlotCartesian(double x, double y, double intensity = 1.0)
+        {
+            int rgb = Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
+            Bitmap.SetPixel((int)x, (int)y, Color.FromArgb(rgb, rgb, rgb));
+
+        }
+
+        public void PlotPolar(double r, double theta, double intensity = 1.0)
         {
             double xCart = r * Math.Cos(theta);
             double yCart = r * Math.Sin(theta);
-            int x = (int)(xCart + Bitmap.Width / 2.0);
-            int y = (int)(Bitmap.Height - yCart - Bitmap.Height / 2.0);
-
-            int rgb = Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
-
-            Bitmap.SetPixel(x, y, Color.FromArgb(rgb, rgb, rgb));
+            PlotCartesian((xCart + Bitmap.Width / 2.0), (Bitmap.Height - yCart - Bitmap.Height / 2.0), intensity);
         }
 
         public void PlotFunction(Func<double,double,double> f)
@@ -53,7 +55,7 @@ namespace GalaxyModel
                     double r = Math.Sqrt(xCart * xCart + yCart * yCart);
                     double theta = Math.Atan2(yCart, xCart);
 
-                    Plot(r, theta, f(r, theta));
+                    PlotPolar(r, theta, f(r, theta));
                 }
         }
 
