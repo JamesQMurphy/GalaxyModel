@@ -32,10 +32,11 @@
             this.numResolution = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
             this.txtA = new System.Windows.Forms.TextBox();
-            this.txtB = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.numPitchDegrees = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.numResolution)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPitchDegrees)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -87,14 +88,6 @@
             this.txtA.TabIndex = 4;
             this.txtA.Text = "1.0";
             // 
-            // txtB
-            // 
-            this.txtB.Location = new System.Drawing.Point(122, 134);
-            this.txtB.Name = "txtB";
-            this.txtB.Size = new System.Drawing.Size(61, 20);
-            this.txtB.TabIndex = 5;
-            this.txtB.Text = "1.0";
-            // 
             // label2
             // 
             this.label2.AutoSize = true;
@@ -109,18 +102,41 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(40, 137);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(45, 13);
+            this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Spiral b:";
+            this.label3.Text = "Pitch (deg):";
+            // 
+            // numPitchDegrees
+            // 
+            this.numPitchDegrees.Location = new System.Drawing.Point(122, 135);
+            this.numPitchDegrees.Maximum = new decimal(new int[] {
+            89,
+            0,
+            0,
+            0});
+            this.numPitchDegrees.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numPitchDegrees.Name = "numPitchDegrees";
+            this.numPitchDegrees.Size = new System.Drawing.Size(61, 20);
+            this.numPitchDegrees.TabIndex = 8;
+            this.numPitchDegrees.Value = new decimal(new int[] {
+            20,
+            0,
+            0,
+            0});
+            this.numPitchDegrees.ValueChanged += new System.EventHandler(this.numPitchDegrees_ValueChanged);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(604, 412);
+            this.Controls.Add(this.numPitchDegrees);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtB);
             this.Controls.Add(this.txtA);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numResolution);
@@ -128,6 +144,7 @@
             this.Name = "Form1";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.numResolution)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPitchDegrees)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -138,9 +155,9 @@
         private System.Windows.Forms.NumericUpDown numResolution;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.TextBox txtA;
-        private System.Windows.Forms.TextBox txtB;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.NumericUpDown numPitchDegrees;
     }
 }
 

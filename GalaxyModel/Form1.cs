@@ -39,9 +39,9 @@ namespace GalaxyModel
 
             var newPlot = new PolarPlot(boxRadius);
             double a = Convert.ToDouble(txtA.Text);
-            double b = Convert.ToDouble(txtB.Text);
+            double phi = (90.0 - (double)numPitchDegrees.Value) * Math.PI / 180.0;
 
-            newPlot.PlotPolarFunction(r => Math.Log(r/a)/b);
+            newPlot.PlotPolarFunction(r => Math.Log(r/a)*Math.Tan(phi));
 
             // Density function
             //newPlot.PlotPolarFunction((r,th) => {
@@ -66,6 +66,11 @@ namespace GalaxyModel
 
             _galaxyPlotForm.Bitmap = newPlot.GenerateBitmap();
             this.Cursor = Cursors.Default;
+        }
+
+        private void numPitchDegrees_ValueChanged(object sender, EventArgs e)
+        {
+            _GeneratePlot((int)this.numResolution.Value);
         }
     }
 }
