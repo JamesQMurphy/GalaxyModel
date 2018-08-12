@@ -41,25 +41,25 @@ namespace GalaxyModel
             double a = Convert.ToDouble(txtA.Text);
             double phi = (90.0 - (double)numPitchDegrees.Value) * Math.PI / 180.0;
 
-            newPlot.PlotPolarFunction(r => Math.Log(r/a)*Math.Tan(phi));
+            //newPlot.PlotPolarFunction(r => Math.Log(r/a)*Math.Tan(phi));
 
             // Density function
             //newPlot.PlotPolarFunction((r,th) => {
             //    return (byte)(Math.Max(0.0, (boxRadius - r) * 256.0 / boxRadius));
             //});
 
-            //double brightness = 150.0;
-            //double ws = 0.3;  // amount of perturbation
-            //int m = 2;    // number of spiral arms
-            //double p = 20 * 180.0 / Math.PI;  // pitch angle of arms
+            double brightness = 150.0;
+            double ws = 0.4;  // amount of perturbation
+            int m = 2;    // number of spiral arms
+            double p = (double)numPitchDegrees.Value * Math.PI / 180.0;  // pitch angle of arms
 
-            //newPlot.PlotPolarFunction((r, th) =>
-            //{
-            //    return (byte)(
-            //        brightness * Math.Exp(-r/boxRadius)
-            //        * (1 + ws * Math.Sin(m*Math.Log(r)/Math.Tan(p) - m*th))
-            //    );
-            //});
+            newPlot.PlotPolarFunction((r, th) =>
+            {
+                return (byte)(
+                    brightness * Math.Exp(-r / boxRadius)
+                    * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * th))
+                );
+            });
 
 
             //newPlot.DrawX();
