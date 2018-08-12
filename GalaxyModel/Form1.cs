@@ -47,14 +47,14 @@ namespace GalaxyModel
 
             // Function for circle of radius resolution/4
             var thisRadius = resolution / 4.0;
-            double circ(double r, double theta)
-            {
-                if ((r > (thisRadius - 1.0)) && (r < (thisRadius + 1.0)))
-                {
-                    return 1.0 - Math.Abs(thisRadius - r);
-                }
-                return 0.0;
-            }
+            //double circ(double r, double theta)
+            //{
+            //    if ((r > (thisRadius - 1.0)) && (r < (thisRadius + 1.0)))
+            //    {
+            //        return 1.0 - Math.Abs(thisRadius - r);
+            //    }
+            //    return 0.0;
+            //}
             //newPlot.PlotFunction(circ);
 
 
@@ -68,7 +68,7 @@ namespace GalaxyModel
 
             newPlot.DrawX();
 
-            _galaxyPlotForm.PolarPlot = newPlot;
+            _galaxyPlotForm.Bitmap = newPlot.GenerateBitmap();
             this.Cursor = Cursors.Default;
         }
     }

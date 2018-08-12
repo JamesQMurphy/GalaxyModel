@@ -17,18 +17,18 @@ namespace GalaxyModel
             //this.ResizeEnd += (s, e) => { this.ResumeLayout(true); };
         }
 
-        private PolarPlot _polarPlot = null;
-        public PolarPlot PolarPlot
+        private Bitmap _bitmap = null;
+        public Bitmap Bitmap
         {
-            get { return _polarPlot; }
+            get { return _bitmap; }
             set
             {
-                var oldPolarPlot = _polarPlot;
-                _polarPlot = value;
+                var oldBitmap = _bitmap;
+                _bitmap = value;
                 this.Invalidate();
-                if (oldPolarPlot != null)
+                if (oldBitmap != null)
                 {
-                    oldPolarPlot.Dispose();
+                    oldBitmap.Dispose();
                 }
             }
         }
@@ -41,12 +41,12 @@ namespace GalaxyModel
 
         protected override void OnPaint(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(_polarPlot.Bitmap, e.Graphics.VisibleClipBounds);
+            e.Graphics.DrawImage(_bitmap, e.Graphics.VisibleClipBounds);
         }
 
         protected override void Dispose(bool disposing)
         {
-            _polarPlot.Dispose();
+            _bitmap.Dispose();
             base.Dispose(disposing);
         }
     }
