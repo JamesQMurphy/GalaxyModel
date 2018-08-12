@@ -60,11 +60,13 @@ namespace GalaxyModel
 
         public void DrawX()
         {
+            Lock();
             for (int i = 0; i < Bitmap.Width; i++)
             {
                 _SetPixel(i, i, 1.0);
                 _SetPixel(Bitmap.Width - 1 - i, i, 1.0);
             }
+            Unlock();
         }
 
         public void PlotCartesian(double x, double y, double intensity = 1.0)
@@ -81,6 +83,7 @@ namespace GalaxyModel
 
         public void PlotPolarFunction(Func<double,double,double> f)
         {
+            Lock();
             for (double x = 0.0; x < Bitmap.Width; x += 0.5)
                 for (double y = 0.0; y < Bitmap.Height; y += 0.5)
                 {
@@ -94,6 +97,7 @@ namespace GalaxyModel
 
                     PlotPolar(r, theta, f(r, theta));
                 }
+            Unlock();
         }
 
         private void _SetPixel(int x, int y, double intensity = 1.0)
@@ -105,7 +109,7 @@ namespace GalaxyModel
             }
             else
             {
-                int idx = Math.Abs(bitmapData.Stride) * y + x;
+                int idx = Math.Abs(bitmapData.Stride) * y + 3 * x;
                 _byteArray[idx++] = rgb;
                 _byteArray[idx++] = rgb;
                 _byteArray[idx] = rgb;
