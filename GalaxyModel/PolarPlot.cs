@@ -47,46 +47,68 @@ namespace GalaxyModel
         {
             for (int i = 0; i < _bitmapWidth; i++)
             {
-                _SetPixel(i, i);
-                _SetPixel(_bitmapWidth - 1 - i, i);
+                SetPixel(i, i);
+                SetPixel(_bitmapWidth - 1 - i, i);
             }
         }
 
-        public void PlotPolar(double r, double theta, byte brightness = byte.MaxValue)
+        public void PlotPolarPoint(double r, double theta, byte brightness = byte.MaxValue)
         {
             double xCart = r * Math.Cos(theta);
             double yCart = r * Math.Sin(theta);
-            PlotCartesian((xCart + _bitmapWidth / 2.0), (_bitmapHeight - yCart - _bitmapHeight / 2.0), brightness);
+            _PolarToCartesian(r, theta, out double x, out double y);
+            PlotCartesianPoint(x, y, brightness);
         }
 
-        public void PlotCartesian(double x, double y, byte brightness = byte.MaxValue)
+        public void PlotCartesianPoint(double x, double y, byte brightness = byte.MaxValue)
         {
-            _SetPixel((int)x, (int)y, brightness);
+            _CartesianToBitmap(x, y, out int xBitmap, out int yBitmap);
+            SetPixel(xBitmap, yBitmap, brightness);
         }
 
         public void PlotPolarFunction(Func<double,double,byte> f)
         {
             for (int x = 0; x < _bitmapWidth; x++)
+            {
                 for (int y = 0; y < _bitmapHeight; y++)
                 {
-                    // first, true Cartesian
-                    double xCart = (double)x - (_bitmapWidth / 2.0);
-                    double yCart = (double)(_bitmapHeight) - (double)y - (_bitmapHeight / 2.0);
-
-                    // calculate polar coordinates
-                    double r = Math.Sqrt(xCart * xCart + yCart * yCart);
-                    double theta = Math.Atan2(yCart, xCart);
-
-                    _SetPixel(x, y, f(r, theta));
+                    _BitmapToCartesian(x, y, out double xCart, out double yCart);
+                    _CartesianToPolar(xCart, yCart, out double r, out double theta);
+                    SetPixel(x, y, f(r, theta));
                 }
+            }
         }
 
-        private void _SetPixel(int x, int y, byte brightness = byte.MaxValue)
+        public void SetPixel(int x, int y, byte brightness = byte.MaxValue)
         {
             int idx = (_bitmapStride * y) + (BYTES_PER_PIXEL * x);
-            _byteArray[idx++] = brightness;
-            _byteArray[idx++] = brightness;
             _byteArray[idx] = brightness;
+            _byteArray[idx+1] = brightness;
+            _byteArray[idx+2] = brightness;
+        }
+
+        private void _PolarToCartesian(double r, double theta, out double xCart, out double yCart)
+        {
+            xCart = r * Math.Cos(theta);
+            yCart = r * Math.Sin(theta);
+        }
+
+        private void _CartesianToBitmap(double xCart, double yCart, out int xBitmap, out int yBitmap)
+        {
+            xBitmap = (int)(xCart + _bitmapWidth / 2.0);
+            yBitmap = (int)(_bitmapHeight - yCart - _bitmapHeight / 2.0);
+        }
+
+        private void _BitmapToCartesian(int xBitmap, int yBitmap, out double xCart, out double yCart)
+        {
+            xCart = (double)xBitmap - (_bitmapWidth / 2.0);
+            yCart = (double)(_bitmapHeight) - (double)yBitmap - (_bitmapHeight / 2.0);
+        }
+
+        private void _CartesianToPolar(double xCart, double yCart, out double r, out double theta)
+        {
+            r = Math.Sqrt(xCart * xCart + yCart * yCart);
+            theta = Math.Atan2(yCart, xCart);
         }
 
         #region IDisposable Support
