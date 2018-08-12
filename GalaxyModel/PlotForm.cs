@@ -46,7 +46,8 @@ namespace GalaxyModel
 
         protected override void Dispose(bool disposing)
         {
-            _bitmap.Dispose();
+            if (disposing && _bitmap != null)
+                _bitmap.Dispose();
             base.Dispose(disposing);
         }
     }
