@@ -60,9 +60,9 @@ namespace GalaxyModel
 
             // Density function
             var boxRadius = resolution / 2.0;
-            double density(double r, double theta)
+            byte density(double r, double theta)
             {
-                return (boxRadius - r) / boxRadius;
+                return (byte)(Math.Max(0.0,(boxRadius - r) * 256.0/ boxRadius));
             }
             newPlot.PlotPolarFunction(density);
 

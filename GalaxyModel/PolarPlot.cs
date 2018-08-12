@@ -47,24 +47,24 @@ namespace GalaxyModel
         {
             for (int i = 0; i < _bitmapWidth; i++)
             {
-                _SetPixel(i, i, 1.0);
-                _SetPixel(_bitmapWidth - 1 - i, i, 1.0);
+                _SetPixel(i, i);
+                _SetPixel(_bitmapWidth - 1 - i, i);
             }
         }
 
-        public void PlotCartesian(double x, double y, double intensity = 1.0)
+        public void PlotCartesian(double x, double y, byte brightness = byte.MaxValue)
         {
-            _SetPixel((int)x, (int)y, intensity);
+            _SetPixel((int)x, (int)y, brightness);
         }
 
-        public void PlotPolar(double r, double theta, double intensity = 1.0)
+        public void PlotPolar(double r, double theta, byte brightness = byte.MaxValue)
         {
             double xCart = r * Math.Cos(theta);
             double yCart = r * Math.Sin(theta);
-            PlotCartesian((xCart + _bitmapWidth / 2.0), (_bitmapHeight - yCart - _bitmapHeight / 2.0), intensity);
+            PlotCartesian((xCart + _bitmapWidth / 2.0), (_bitmapHeight - yCart - _bitmapHeight / 2.0), brightness);
         }
 
-        public void PlotPolarFunction(Func<double,double,double> f)
+        public void PlotPolarFunction(Func<double,double,byte> f)
         {
             for (double x = 0.0; x < _bitmapWidth; x += 0.5)
                 for (double y = 0.0; y < _bitmapHeight; y += 0.5)
@@ -81,13 +81,12 @@ namespace GalaxyModel
                 }
         }
 
-        private void _SetPixel(int x, int y, double intensity = 1.0)
+        private void _SetPixel(int x, int y, byte brightness = byte.MaxValue)
         {
-            byte rgb = (byte)Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
             int idx = (_bitmapStride * y) + (BYTES_PER_PIXEL * x);
-            _byteArray[idx++] = rgb;
-            _byteArray[idx++] = rgb;
-            _byteArray[idx] = rgb;
+            _byteArray[idx++] = brightness;
+            _byteArray[idx++] = brightness;
+            _byteArray[idx] = brightness;
         }
 
         #region IDisposable Support
