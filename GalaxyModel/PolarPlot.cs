@@ -52,16 +52,16 @@ namespace GalaxyModel
             }
         }
 
-        public void PlotCartesian(double x, double y, byte brightness = byte.MaxValue)
-        {
-            _SetPixel((int)x, (int)y, brightness);
-        }
-
         public void PlotPolar(double r, double theta, byte brightness = byte.MaxValue)
         {
             double xCart = r * Math.Cos(theta);
             double yCart = r * Math.Sin(theta);
             PlotCartesian((xCart + _bitmapWidth / 2.0), (_bitmapHeight - yCart - _bitmapHeight / 2.0), brightness);
+        }
+
+        public void PlotCartesian(double x, double y, byte brightness = byte.MaxValue)
+        {
+            _SetPixel((int)x, (int)y, brightness);
         }
 
         public void PlotPolarFunction(Func<double,double,byte> f)
