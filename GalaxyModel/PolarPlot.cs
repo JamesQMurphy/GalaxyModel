@@ -10,8 +10,8 @@ namespace GalaxyModel
 {
     public class PolarPlot : IDisposable
     {
-        const PixelFormat PIXEL_FORMAT = PixelFormat.Format24bppRgb;
-        const int BYTES_PER_PIXEL = 3;
+        const PixelFormat PIXEL_FORMAT = PixelFormat.Format48bppRgb;
+        const int BYTES_PER_PIXEL = 6;
 
         private readonly int _bitmapWidth;
         private readonly int _bitmapHeight;
@@ -52,7 +52,7 @@ namespace GalaxyModel
             }
         }
 
-        public void PlotPolarPoint(double r, double theta, byte brightness = byte.MaxValue)
+        public void PlotPolarPoint(double r, double theta, Int16 brightness = Int16.MaxValue)
         {
             double xCart = r * Math.Cos(theta);
             double yCart = r * Math.Sin(theta);
@@ -60,13 +60,13 @@ namespace GalaxyModel
             PlotCartesianPoint(x, y, brightness);
         }
 
-        public void PlotCartesianPoint(double x, double y, byte brightness = byte.MaxValue)
+        public void PlotCartesianPoint(double x, double y, Int16 brightness = Int16.MaxValue)
         {
             _CartesianToBitmap(x, y, out int xBitmap, out int yBitmap);
             SetPixel(xBitmap, yBitmap, brightness);
         }
 
-        public void PlotPolarFunction(Func<double,double> f, byte brightness = byte.MaxValue)
+        public void PlotPolarFunction(Func<double,double> f, Int16 brightness = Int16.MaxValue)
         {
             // Function is theta = f(r)
             // go to 1.5 times r
@@ -78,7 +78,7 @@ namespace GalaxyModel
             }
         }
 
-        public void PlotPolarFunction(Func<double,double,byte> f)
+        public void PlotPolarFunction(Func<double,double,Int16> f)
         {
             for (int x = 0; x < _bitmapWidth; x++)
             {
@@ -91,7 +91,7 @@ namespace GalaxyModel
             }
         }
 
-        public bool SetPixel(int x, int y, byte brightness = byte.MaxValue)
+        public bool SetPixel(int x, int y, Int16 brightness = Int16.MaxValue)
         {
             if ((x >= 0) && (y >= 0) && (x < _bitmapWidth) && (y < _bitmapWidth))
             {
@@ -128,12 +128,17 @@ namespace GalaxyModel
             theta = Math.Atan2(yCart, xCart);
         }
 
-        public void _SetPixelNoCheck(int x, int y, byte brightness = byte.MaxValue)
+        public void _SetPixelNoCheck(int x, int y, Int16 brightness = Int16.MaxValue)
         {
+            byte lowByte = (byte)(brightness & 0xff);
+            byte highByte = (byte)((brightness >> 8) & 0xff);
             int idx = (_bitmapStride * y) + (BYTES_PER_PIXEL * x);
-            _byteArray[idx] = brightness;
-            _byteArray[idx + 1] = brightness;
-            _byteArray[idx + 2] = brightness;
+            _byteArray[idx] = lowByte;
+            _byteArray[idx + 1] = highByte;
+            _byteArray[idx + 2] = lowByte;
+            _byteArray[idx + 3] = highByte;
+            _byteArray[idx + 4] = lowByte;
+            _byteArray[idx + 5] = highByte;
         }
 
 

@@ -51,13 +51,14 @@ namespace GalaxyModel
             //    return (byte)(Math.Max(0.0, (boxRadius - r) * 256.0 / boxRadius));
             //});
 
-            double brightness = 150.0;
+            double galaxyRadius = boxRadius / 2.0;
+            double brightness = 1500.0;
             int m = 2;    // number of spiral arms
             double p = (double)numPitchDegrees.Value * Math.PI / 180.0;  // pitch angle of arms
 
             newPlot.PlotPolarFunction((r, th) =>
             {
-                return (byte)(
+                return (Int16)(
                     brightness * Math.Exp(-r / boxRadius)
                     * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * th))
                 );
