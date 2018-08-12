@@ -18,7 +18,7 @@ namespace GalaxyModel
         {
             InitializeComponent();
 
-            _GeneratePlot((int)this.numResolution.Value);
+            _GeneratePlot();
         }
 
         protected override void OnShown(EventArgs e)
@@ -29,18 +29,21 @@ namespace GalaxyModel
 
         private void button1_Click_1(object sender, EventArgs e)
         {
-            _GeneratePlot((int)this.numResolution.Value);
+            _GeneratePlot();
         }
 
-        private void _GeneratePlot(int resolution)
+        private void _GeneratePlot()
         {
             this.Cursor = Cursors.WaitCursor;
-            var boxRadius = resolution / 2.0;
+            var boxRadius = (double)this.numResolution.Value / 2.0;
+            double ws = 0.0;
+            double.TryParse(txtWs.Text, out ws);
 
             var newPlot = new PolarPlot(boxRadius);
-            double a = Convert.ToDouble(txtA.Text);
-            double phi = (90.0 - (double)numPitchDegrees.Value) * Math.PI / 180.0;
 
+            // Simple Spiral
+            //double a = Convert.ToDouble(txtA.Text);
+            //double phi = (90.0 - (double)numPitchDegrees.Value) * Math.PI / 180.0;
             //newPlot.PlotPolarFunction(r => Math.Log(r/a)*Math.Tan(phi));
 
             // Density function
@@ -49,7 +52,6 @@ namespace GalaxyModel
             //});
 
             double brightness = 150.0;
-            double ws = 0.4;  // amount of perturbation
             int m = 2;    // number of spiral arms
             double p = (double)numPitchDegrees.Value * Math.PI / 180.0;  // pitch angle of arms
 
@@ -70,7 +72,12 @@ namespace GalaxyModel
 
         private void numPitchDegrees_ValueChanged(object sender, EventArgs e)
         {
-            _GeneratePlot((int)this.numResolution.Value);
+            _GeneratePlot();
+        }
+
+        private void txtWs_TextChanged(object sender, EventArgs e)
+        {
+            _GeneratePlot();
         }
     }
 }

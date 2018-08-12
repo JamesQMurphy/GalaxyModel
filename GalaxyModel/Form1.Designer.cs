@@ -31,7 +31,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.numResolution = new System.Windows.Forms.NumericUpDown();
             this.button1 = new System.Windows.Forms.Button();
-            this.txtA = new System.Windows.Forms.TextBox();
+            this.txtWs = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.numPitchDegrees = new System.Windows.Forms.NumericUpDown();
@@ -80,22 +80,23 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click_1);
             // 
-            // txtA
+            // txtWs
             // 
-            this.txtA.Location = new System.Drawing.Point(122, 88);
-            this.txtA.Name = "txtA";
-            this.txtA.Size = new System.Drawing.Size(61, 20);
-            this.txtA.TabIndex = 4;
-            this.txtA.Text = "1.0";
+            this.txtWs.Location = new System.Drawing.Point(122, 88);
+            this.txtWs.Name = "txtWs";
+            this.txtWs.Size = new System.Drawing.Size(61, 20);
+            this.txtWs.TabIndex = 4;
+            this.txtWs.Text = "0.4";
+            this.txtWs.TextChanged += new System.EventHandler(this.txtWs_TextChanged);
             // 
             // label2
             // 
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(40, 91);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(45, 13);
+            this.label2.Size = new System.Drawing.Size(67, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Spiral a:";
+            this.label2.Text = "Perturbation:";
             // 
             // label3
             // 
@@ -137,7 +138,7 @@
             this.Controls.Add(this.numPitchDegrees);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
-            this.Controls.Add(this.txtA);
+            this.Controls.Add(this.txtWs);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.numResolution);
             this.Controls.Add(this.label1);
@@ -154,7 +155,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.NumericUpDown numResolution;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox txtA;
+        private System.Windows.Forms.TextBox txtWs;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.NumericUpDown numPitchDegrees;
