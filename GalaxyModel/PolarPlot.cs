@@ -66,8 +66,8 @@ namespace GalaxyModel
 
         public void PlotPolarFunction(Func<double,double,byte> f)
         {
-            for (double x = 0.0; x < _bitmapWidth; x += 0.5)
-                for (double y = 0.0; y < _bitmapHeight; y += 0.5)
+            for (int x = 0; x < _bitmapWidth; x++)
+                for (int y = 0; y < _bitmapHeight; y++)
                 {
                     // first, true Cartesian
                     double xCart = (double)x - (_bitmapWidth / 2.0);
@@ -77,7 +77,7 @@ namespace GalaxyModel
                     double r = Math.Sqrt(xCart * xCart + yCart * yCart);
                     double theta = Math.Atan2(yCart, xCart);
 
-                    PlotPolar(r, theta, f(r, theta));
+                    _SetPixel(x, y, f(r, theta));
                 }
         }
 
