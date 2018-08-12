@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,14 +10,52 @@ namespace GalaxyModel
 {
     public class PolarPlot : IDisposable
     {
+        const PixelFormat PIXEL_FORMAT = PixelFormat.Format24bppRgb;
+
         private readonly double _radius;
+        private int _lockCount = 0;
+        private object _lockObj = new object();
+        private IntPtr _ptr = IntPtr.Zero;
+        private byte[] _byteArray = null;
+        private BitmapData bitmapData = null;
         public Bitmap Bitmap { get; }
 
         public PolarPlot(double radius)
         {
             _radius = radius;
             int bitmapSize = (int)(2.0 * radius) + 1;
-            Bitmap = new Bitmap(bitmapSize, bitmapSize, System.Drawing.Imaging.PixelFormat.Format48bppRgb);
+            Bitmap = new Bitmap(bitmapSize, bitmapSize, PIXEL_FORMAT);
+        }
+
+        public int Lock()
+        {
+            lock(_lockObj)
+            {
+                ++_lockCount;
+                if (_lockCount == 1)
+                {
+                    Rectangle rect = new Rectangle(0, 0, Bitmap.Width, Bitmap.Height);
+                    bitmapData = Bitmap.LockBits(rect, ImageLockMode.ReadWrite, PIXEL_FORMAT);
+                    _ptr = bitmapData.Scan0;
+                    int bytes = Math.Abs(bitmapData.Stride) * Bitmap.Height;
+                    _byteArray = new byte[bytes];
+                    System.Runtime.InteropServices.Marshal.Copy(_ptr, _byteArray, 0, bytes);
+                }
+                return _lockCount;
+            }
+        }
+
+        public int Unlock()
+        {
+            lock(_lockObj)
+            {
+                if (_lockCount == 1)
+                {
+                    System.Runtime.InteropServices.Marshal.Copy(_byteArray, 0, _ptr, _byteArray.Length);
+                    Bitmap.UnlockBits(bitmapData);
+                }
+                return --_lockCount;
+            }
         }
 
         public void DrawX()
@@ -59,8 +98,18 @@ namespace GalaxyModel
 
         private void _SetPixel(int x, int y, double intensity = 1.0)
         {
-            int rgb = Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
-            Bitmap.SetPixel(x, y, Color.FromArgb(rgb, rgb, rgb));
+            byte rgb = (byte)Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
+            if (_lockCount == 0)
+            {
+                Bitmap.SetPixel(x, y, Color.FromArgb(rgb, rgb, rgb));
+            }
+            else
+            {
+                int idx = Math.Abs(bitmapData.Stride) * y + x;
+                _byteArray[idx++] = rgb;
+                _byteArray[idx++] = rgb;
+                _byteArray[idx] = rgb;
+            }
         }
 
         #region IDisposable Support
