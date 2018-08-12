@@ -23,16 +23,14 @@ namespace GalaxyModel
         {
             for (int i = 0; i < Bitmap.Width; i++)
             {
-                Bitmap.SetPixel(i, i, Color.White);
-                Bitmap.SetPixel(Bitmap.Width - 1 - i, i, Color.White);
+                _SetPixel(i, i, 1.0);
+                _SetPixel(Bitmap.Width - 1 - i, i, 1.0);
             }
         }
 
         public void PlotCartesian(double x, double y, double intensity = 1.0)
         {
-            int rgb = Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
-            Bitmap.SetPixel((int)x, (int)y, Color.FromArgb(rgb, rgb, rgb));
-
+            _SetPixel((int)x, (int)y, intensity);
         }
 
         public void PlotPolar(double r, double theta, double intensity = 1.0)
@@ -57,6 +55,12 @@ namespace GalaxyModel
 
                     PlotPolar(r, theta, f(r, theta));
                 }
+        }
+
+        private void _SetPixel(int x, int y, double intensity = 1.0)
+        {
+            int rgb = Math.Max(Math.Min((int)Math.Truncate(intensity * 255.0), 255), 0);
+            Bitmap.SetPixel(x, y, Color.FromArgb(rgb, rgb, rgb));
         }
 
         #region IDisposable Support

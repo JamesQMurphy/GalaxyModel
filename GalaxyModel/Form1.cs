@@ -66,6 +66,8 @@ namespace GalaxyModel
             }
             newPlot.PlotPolarFunction(density);
 
+            newPlot.DrawX();
+
             _galaxyPlotForm.PolarPlot = newPlot;
             this.Cursor = Cursors.Default;
         }
