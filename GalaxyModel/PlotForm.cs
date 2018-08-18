@@ -25,11 +25,11 @@ namespace GalaxyModel
             {
                 var oldBitmap = _bitmap;
                 _bitmap = value;
-                this.Invalidate();
                 if (oldBitmap != null)
                 {
                     oldBitmap.Dispose();
                 }
+                this.Invalidate();
             }
         }
 

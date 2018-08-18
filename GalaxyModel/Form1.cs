@@ -41,16 +41,6 @@ namespace GalaxyModel
 
             var newPlot = new PolarPlot(boxRadius);
 
-            // Simple Spiral
-            //double a = Convert.ToDouble(txtA.Text);
-            //double phi = (90.0 - (double)numPitchDegrees.Value) * Math.PI / 180.0;
-            //newPlot.PlotPolarFunction(r => Math.Log(r/a)*Math.Tan(phi));
-
-            // Density function
-            //newPlot.PlotPolarFunction((r,th) => {
-            //    return (byte)(Math.Max(0.0, (boxRadius - r) * 256.0 / boxRadius));
-            //});
-
             double galaxyRadius = boxRadius / 2.0;
             double brightness = 1500.0;
             int m = 2;    // number of spiral arms
@@ -63,7 +53,6 @@ namespace GalaxyModel
                     * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * th))
                 );
             });
-
 
             //newPlot.DrawX();
 

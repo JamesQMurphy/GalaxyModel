@@ -66,7 +66,7 @@ namespace GalaxyModel
             SetPixel(xBitmap, yBitmap, brightness);
         }
 
-        public void PlotPolarFunction(Func<double,double> f, Int16 brightness = Int16.MaxValue)
+        public void PlotPolarFunctionOfR(Func<double, double> f, Int16 brightness = Int16.MaxValue)
         {
             // Function is theta = f(r)
             // go to 1.5 times r
@@ -75,6 +75,16 @@ namespace GalaxyModel
             for (double r = 0.0; r < maxR; r = r + increment)
             {
                 PlotPolarPoint(r, f(r), brightness);
+            }
+        }
+
+        public void PlotPolarFunctionOfTheta(Func<double, double> f, Int16 brightness = Int16.MaxValue)
+        {
+            // Function is theta = f(r)
+            // Go four rotations -4*pi to 4*pi
+            for (double theta = -12.57; theta < 12.57; theta = theta + 0.01)
+            {
+                PlotPolarPoint(f(theta), theta, brightness);
             }
         }
 
