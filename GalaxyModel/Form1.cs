@@ -42,17 +42,21 @@ namespace GalaxyModel
             var newPlot = new PolarPlot(boxRadius);
 
             double galaxyRadius = boxRadius / 2.0;
-            double brightness = 1500.0;
+            double Ls = 1500.0;
             int m = 2;    // number of spiral arms
             double p = (double)numPitchDegrees.Value * Math.PI / 180.0;  // pitch angle of arms
 
-            newPlot.PlotPolarFunction((r, th) =>
+            // This is the function from the Misiriotis et. al. paper
+            Int16 L(double r, double theta)
             {
                 return (Int16)(
-                    brightness * Math.Exp(-r / galaxyRadius)
-                    * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * th))
+                    Ls * Math.Exp(-r / galaxyRadius)
+                    * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * theta))
                 );
-            });
+            }
+
+            // Plot it
+            newPlot.PlotPolarFunction(L);
 
             //newPlot.DrawX();
 
