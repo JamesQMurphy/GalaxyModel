@@ -43,9 +43,9 @@ namespace GalaxyModel
 
             double galaxyRadius = boxRadius / 2.0;
             double galaxyHeight = galaxyRadius / 20.0;
-            double bulgeRadius = galaxyRadius * 1.0;
-            double Ls = 100.0;
-            double Lb = 1000.0;
+            double bulgeRadius = galaxyRadius * 5.0;
+            double Ls = 50.0;
+            double Lb = 10.0;
             int m = 2;    // number of spiral arms
             double p = (double)numPitchDegrees.Value * Math.PI / 180.0;  // pitch angle of arms
 
@@ -61,14 +61,15 @@ namespace GalaxyModel
             }
 
             // Here is a "stacked" version of that function in just r and theta
-            double increment = galaxyHeight / 4.99;
+            double increment = galaxyHeight / 0.99;
             Int16 LPlottable(double r, double theta)
             {
-                Int16 retVal = L(r, theta, 0.0);
+                Int16 L0 = L(r, theta, 0.0);
+                Int16 retVal = (Int16)Math.Pow(L0, 1.5);
                 for (double z = increment; z < galaxyHeight; z += increment)
                 {
-                    retVal += L(r, theta, -z);
-                    retVal += L(r, theta, z);
+                    Int16 Li = L(r, theta, z);
+                    retVal += (Int16)Math.Pow(Li, 1.5);
                 }
                 return retVal;
             }
