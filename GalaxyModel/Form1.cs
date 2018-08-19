@@ -49,7 +49,7 @@ namespace GalaxyModel
             newPlot.PlotPolarFunction((r, th) =>
             {
                 return (Int16)(
-                    brightness * Math.Exp(-r / boxRadius)
+                    brightness * Math.Exp(-r / galaxyRadius)
                     * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * th))
                 );
             });
