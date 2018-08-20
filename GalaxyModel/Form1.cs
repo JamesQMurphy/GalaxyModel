@@ -42,7 +42,7 @@ namespace GalaxyModel
             var newPlot = new PolarPlot(boxRadius);
 
             double galaxyRadius = boxRadius / 2.0;
-            double galaxyHeight = galaxyRadius / 20.0;
+            double galaxyHeight = galaxyRadius / 10.0;
             double bulgeRadius = galaxyRadius * 5.0;
             double Ls = 50.0;
             double Lb = 10.0;
@@ -69,7 +69,7 @@ namespace GalaxyModel
                 for (double z = increment; z < galaxyHeight; z += increment)
                 {
                     Int16 Li = L(r, theta, z);
-                    retVal += (Int16)Math.Pow(Li, 1.5);
+                    retVal += (Int16)(2 * Math.Pow(Li, 1.5));
                 }
                 return retVal;
             }
