@@ -192,7 +192,7 @@
     <value>3</value>
   </data>
   <data name="txtWs.Location" type="System.Drawing.Point, System.Drawing">
-    <value>454, 115</value>
+    <value>454, 114</value>
   </data>
   <data name="txtWs.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 20</value>
@@ -270,7 +270,7 @@
     <value>9</value>
   </data>
   <data name="numPitchDegrees.Location" type="System.Drawing.Point, System.Drawing">
-    <value>278, 115</value>
+    <value>278, 114</value>
   </data>
   <data name="numPitchDegrees.Size" type="System.Drawing.Size, System.Drawing">
     <value>61, 20</value>
@@ -391,7 +391,7 @@
     <value>1</value>
   </data>
   <data name="numArms.Location" type="System.Drawing.Point, System.Drawing">
-    <value>107, 115</value>
+    <value>105, 114</value>
   </data>
   <data name="numArms.Size" type="System.Drawing.Size, System.Drawing">
     <value>57, 20</value>
@@ -573,6 +573,30 @@
   <data name="&gt;&gt;groupBox2.ZOrder" xml:space="preserve">
     <value>0</value>
   </data>
+  <data name="tbBulgeBrightness.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
+    <value>NoControl</value>
+  </data>
+  <data name="tbBulgeBrightness.Location" type="System.Drawing.Point, System.Drawing">
+    <value>102, 67</value>
+  </data>
+  <data name="tbBulgeBrightness.Size" type="System.Drawing.Size, System.Drawing">
+    <value>456, 45</value>
+  </data>
+  <data name="tbBulgeBrightness.TabIndex" type="System.Int32, mscorlib">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;tbBulgeBrightness.Name" xml:space="preserve">
+    <value>tbBulgeBrightness</value>
+  </data>
+  <data name="&gt;&gt;tbBulgeBrightness.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;tbBulgeBrightness.Parent" xml:space="preserve">
+    <value>groupBox2</value>
+  </data>
+  <data name="&gt;&gt;tbBulgeBrightness.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
   <data name="label7.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
   </data>
@@ -632,30 +656,6 @@
   </data>
   <data name="&gt;&gt;label9.ZOrder" xml:space="preserve">
     <value>3</value>
-  </data>
-  <data name="tbBulgeBrightness.ImeMode" type="System.Windows.Forms.ImeMode, System.Windows.Forms">
-    <value>NoControl</value>
-  </data>
-  <data name="tbBulgeBrightness.Location" type="System.Drawing.Point, System.Drawing">
-    <value>102, 67</value>
-  </data>
-  <data name="tbBulgeBrightness.Size" type="System.Drawing.Size, System.Drawing">
-    <value>456, 45</value>
-  </data>
-  <data name="tbBulgeBrightness.TabIndex" type="System.Int32, mscorlib">
-    <value>1</value>
-  </data>
-  <data name="&gt;&gt;tbBulgeBrightness.Name" xml:space="preserve">
-    <value>tbBulgeBrightness</value>
-  </data>
-  <data name="&gt;&gt;tbBulgeBrightness.Type" xml:space="preserve">
-    <value>System.Windows.Forms.TrackBar, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;tbBulgeBrightness.Parent" xml:space="preserve">
-    <value>groupBox2</value>
-  </data>
-  <data name="&gt;&gt;tbBulgeBrightness.ZOrder" xml:space="preserve">
-    <value>0</value>
   </data>
   <metadata name="$this.Localizable" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
     <value>True</value>

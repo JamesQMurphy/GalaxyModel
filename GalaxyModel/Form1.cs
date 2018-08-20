@@ -13,23 +13,33 @@ namespace GalaxyModel
     public partial class Form1 : Form
     {
         private PlotForm _galaxyPlotForm = new PlotForm();
+        private double ws = 0.0;
+        private double boxRadius = 0.0;
+        private double galaxyRadius = 0.0;
+        private double galaxyHeight = 0.0;
+        private double bulgeRadius = 0.0;
+        private double Ls = 50.0;
+        private double Lb = 10.0;
+        int m = 2;    // number of spiral arms
+        double p = 0.0;  // pitch angle of arms
+
 
         public Form1()
         {
             InitializeComponent();
 
-            _GeneratePlot();
+            Anyvalue_changed(null, null);
         }
 
+        // This is the function from the Misiriotis et. al. paper
         public Int16 L(double r, double theta, double z)
         {
-            //double B = Math.Sqrt(r * r + z * z) / bulgeRadius;
-            //return (Int16)(
-            //    Ls * Math.Exp((-r / galaxyRadius) - (Math.Abs(z) / galaxyHeight))
-            //    * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * theta))
-            //    + Lb * Math.Exp(-7.67 * Math.Pow(B, 0.25)) * Math.Pow(B, -0.875)
-            //);
-            return (Int16)0;
+            double B = Math.Sqrt(r * r + z * z) / bulgeRadius;
+            return (Int16)(
+                Ls * Math.Exp((-r / galaxyRadius) - (Math.Abs(z) / galaxyHeight))
+                * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * theta))
+                + Lb * Math.Exp(-7.67 * Math.Pow(B, 0.25)) * Math.Pow(B, -0.875)
+            );
         }
 
 
@@ -39,9 +49,30 @@ namespace GalaxyModel
             base.OnShown(e);
         }
 
-        private void anyvalue_changed(object sender, EventArgs e)
+        private void Anyvalue_changed(object sender, EventArgs e)
         {
+            if (sender != null)
+            {
+                if (((Control)sender).Capture)
+                    return;
+            }
+            // Glean values from form
+            boxRadius = (double)this.numResolution.Value / 2.0;
+            double.TryParse(txtWs.Text, out ws);
+            galaxyRadius = (double)boxRadius / 2.0;
+            galaxyHeight = galaxyRadius / 10.0;
+            bulgeRadius = (double)galaxyRadius * 5.0;
+            Ls = (double)tbSpiralBrightness.Value;
+            Lb = (double)tbBulgeBrightness.Value;
+            m = (int)numArms.Value;
+            p = (double)numPitchDegrees.Value * Math.PI / 180.0;
+
             _GeneratePlot();
+        }
+
+        private void tbSpiralRadius_MouseUp(object sender, MouseEventArgs e)
+        {
+            Anyvalue_changed(sender, e);
         }
 
 
@@ -49,32 +80,9 @@ namespace GalaxyModel
         private void _GeneratePlot()
         {
             this.Cursor = Cursors.WaitCursor;
-            var boxRadius = (double)this.numResolution.Value / 2.0;
-            double ws = 0.0;
-            double.TryParse(txtWs.Text, out ws);
-
             var newPlot = new PolarPlot(boxRadius);
 
-            double galaxyRadius = boxRadius / 2.0;
-            double galaxyHeight = galaxyRadius / 10.0;
-            double bulgeRadius = galaxyRadius * 5.0;
-            double Ls = 50.0;
-            double Lb = 10.0;
-            int m = 2;    // number of spiral arms
-            double p = (double)numPitchDegrees.Value * Math.PI / 180.0;  // pitch angle of arms
-
-            // This is the function from the Misiriotis et. al. paper
-            Int16 L(double r, double theta, double z)
-            {
-                double B = Math.Sqrt(r * r + z * z) / bulgeRadius;
-                return (Int16)(
-                    Ls * Math.Exp((-r / galaxyRadius) - (Math.Abs(z) / galaxyHeight))
-                    * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * theta))
-                    + Lb * Math.Exp(-7.67 * Math.Pow(B, 0.25)) * Math.Pow(B, -0.875) 
-                );
-            }
-
-            // Here is a "stacked" version of that function in just r and theta
+            // Here is a "stacked" version of the Misiriotis function in just r and theta
             double increment = galaxyHeight / 0.99;
             Int16 LPlottable(double r, double theta)
             {

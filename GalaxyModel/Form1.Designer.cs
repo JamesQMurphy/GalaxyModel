@@ -39,24 +39,24 @@
             this.tbSpiralRadius = new System.Windows.Forms.TrackBar();
             this.label4 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbSpiralBrightness = new System.Windows.Forms.TrackBar();
             this.label6 = new System.Windows.Forms.Label();
             this.numArms = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.tbBulgeRadius = new System.Windows.Forms.TrackBar();
             this.label5 = new System.Windows.Forms.Label();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.tbSpiralBrightness = new System.Windows.Forms.TrackBar();
-            this.label9 = new System.Windows.Forms.Label();
             this.tbBulgeBrightness = new System.Windows.Forms.TrackBar();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.numResolution)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numPitchDegrees)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbSpiralRadius)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpiralBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numArms)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBulgeRadius)).BeginInit();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpiralBrightness)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBulgeBrightness)).BeginInit();
             this.SuspendLayout();
             // 
@@ -90,13 +90,13 @@
             resources.ApplyResources(this.button1, "button1");
             this.button1.Name = "button1";
             this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.anyvalue_changed);
+            this.button1.Click += new System.EventHandler(this.Anyvalue_changed);
             // 
             // txtWs
             // 
             resources.ApplyResources(this.txtWs, "txtWs");
             this.txtWs.Name = "txtWs";
-            this.txtWs.TextChanged += new System.EventHandler(this.anyvalue_changed);
+            this.txtWs.TextChanged += new System.EventHandler(this.Anyvalue_changed);
             // 
             // label2
             // 
@@ -127,7 +127,7 @@
             0,
             0,
             0});
-            this.numPitchDegrees.ValueChanged += new System.EventHandler(this.anyvalue_changed);
+            this.numPitchDegrees.ValueChanged += new System.EventHandler(this.Anyvalue_changed);
             // 
             // tbSpiralRadius
             // 
@@ -138,6 +138,7 @@
             this.tbSpiralRadius.SmallChange = 10;
             this.tbSpiralRadius.TickFrequency = 100;
             this.tbSpiralRadius.Value = 500;
+            this.tbSpiralRadius.MouseCaptureChanged += new System.EventHandler(this.Anyvalue_changed);
             // 
             // label4
             // 
@@ -159,6 +160,18 @@
             resources.ApplyResources(this.groupBox1, "groupBox1");
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.TabStop = false;
+            // 
+            // tbSpiralBrightness
+            // 
+            resources.ApplyResources(this.tbSpiralBrightness, "tbSpiralBrightness");
+            this.tbSpiralBrightness.LargeChange = 20;
+            this.tbSpiralBrightness.Maximum = 200;
+            this.tbSpiralBrightness.Name = "tbSpiralBrightness";
+            this.tbSpiralBrightness.SmallChange = 5;
+            this.tbSpiralBrightness.TickFrequency = 10;
+            this.tbSpiralBrightness.Value = 50;
+            this.tbSpiralBrightness.ValueChanged += new System.EventHandler(this.Anyvalue_changed);
+            this.tbSpiralBrightness.MouseCaptureChanged += new System.EventHandler(this.Anyvalue_changed);
             // 
             // label6
             // 
@@ -184,7 +197,12 @@
             0,
             0,
             0});
-            this.numArms.ValueChanged += new System.EventHandler(this.anyvalue_changed);
+            this.numArms.ValueChanged += new System.EventHandler(this.Anyvalue_changed);
+            // 
+            // label8
+            // 
+            resources.ApplyResources(this.label8, "label8");
+            this.label8.Name = "label8";
             // 
             // tbBulgeRadius
             // 
@@ -211,40 +229,25 @@
             this.groupBox2.Name = "groupBox2";
             this.groupBox2.TabStop = false;
             // 
+            // tbBulgeBrightness
+            // 
+            resources.ApplyResources(this.tbBulgeBrightness, "tbBulgeBrightness");
+            this.tbBulgeBrightness.LargeChange = 20;
+            this.tbBulgeBrightness.Maximum = 200;
+            this.tbBulgeBrightness.Name = "tbBulgeBrightness";
+            this.tbBulgeBrightness.SmallChange = 10;
+            this.tbBulgeBrightness.TickFrequency = 10;
+            this.tbBulgeBrightness.Value = 10;
+            // 
             // label7
             // 
             resources.ApplyResources(this.label7, "label7");
             this.label7.Name = "label7";
             // 
-            // label8
-            // 
-            resources.ApplyResources(this.label8, "label8");
-            this.label8.Name = "label8";
-            // 
-            // tbSpiralBrightness
-            // 
-            resources.ApplyResources(this.tbSpiralBrightness, "tbSpiralBrightness");
-            this.tbSpiralBrightness.LargeChange = 100;
-            this.tbSpiralBrightness.Maximum = 2000;
-            this.tbSpiralBrightness.Name = "tbSpiralBrightness";
-            this.tbSpiralBrightness.SmallChange = 10;
-            this.tbSpiralBrightness.TickFrequency = 200;
-            this.tbSpiralBrightness.Value = 500;
-            // 
             // label9
             // 
             resources.ApplyResources(this.label9, "label9");
             this.label9.Name = "label9";
-            // 
-            // tbBulgeBrightness
-            // 
-            resources.ApplyResources(this.tbBulgeBrightness, "tbBulgeBrightness");
-            this.tbBulgeBrightness.LargeChange = 100;
-            this.tbBulgeBrightness.Maximum = 2000;
-            this.tbBulgeBrightness.Name = "tbBulgeBrightness";
-            this.tbBulgeBrightness.SmallChange = 10;
-            this.tbBulgeBrightness.TickFrequency = 200;
-            this.tbBulgeBrightness.Value = 500;
             // 
             // Form1
             // 
@@ -262,11 +265,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.tbSpiralRadius)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.tbSpiralBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numArms)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBulgeRadius)).EndInit();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.tbSpiralBrightness)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.tbBulgeBrightness)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
