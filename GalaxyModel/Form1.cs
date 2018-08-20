@@ -21,16 +21,30 @@ namespace GalaxyModel
             _GeneratePlot();
         }
 
+        public Int16 L(double r, double theta, double z)
+        {
+            //double B = Math.Sqrt(r * r + z * z) / bulgeRadius;
+            //return (Int16)(
+            //    Ls * Math.Exp((-r / galaxyRadius) - (Math.Abs(z) / galaxyHeight))
+            //    * (1 + ws * Math.Sin(m * Math.Log(r) / Math.Tan(p) - m * theta))
+            //    + Lb * Math.Exp(-7.67 * Math.Pow(B, 0.25)) * Math.Pow(B, -0.875)
+            //);
+            return (Int16)0;
+        }
+
+
         protected override void OnShown(EventArgs e)
         {
             _galaxyPlotForm.Show();
             base.OnShown(e);
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void anyvalue_changed(object sender, EventArgs e)
         {
             _GeneratePlot();
         }
+
+
 
         private void _GeneratePlot()
         {
@@ -83,14 +97,5 @@ namespace GalaxyModel
             this.Cursor = Cursors.Default;
         }
 
-        private void numPitchDegrees_ValueChanged(object sender, EventArgs e)
-        {
-            _GeneratePlot();
-        }
-
-        private void txtWs_TextChanged(object sender, EventArgs e)
-        {
-            _GeneratePlot();
-        }
     }
 }
