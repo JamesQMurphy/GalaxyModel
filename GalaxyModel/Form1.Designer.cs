@@ -138,6 +138,7 @@
             this.tbSpiralRadius.SmallChange = 10;
             this.tbSpiralRadius.TickFrequency = 100;
             this.tbSpiralRadius.Value = 500;
+            this.tbSpiralRadius.ValueChanged += new System.EventHandler(this.Anyvalue_changed);
             this.tbSpiralRadius.MouseCaptureChanged += new System.EventHandler(this.Anyvalue_changed);
             // 
             // label4
@@ -213,6 +214,8 @@
             this.tbBulgeRadius.SmallChange = 10;
             this.tbBulgeRadius.TickFrequency = 100;
             this.tbBulgeRadius.Value = 100;
+            this.tbBulgeRadius.ValueChanged += new System.EventHandler(this.Anyvalue_changed);
+            this.tbBulgeRadius.MouseCaptureChanged += new System.EventHandler(this.Anyvalue_changed);
             // 
             // label5
             // 
@@ -238,6 +241,8 @@
             this.tbBulgeBrightness.SmallChange = 10;
             this.tbBulgeBrightness.TickFrequency = 10;
             this.tbBulgeBrightness.Value = 10;
+            this.tbBulgeBrightness.ValueChanged += new System.EventHandler(this.Anyvalue_changed);
+            this.tbBulgeBrightness.MouseCaptureChanged += new System.EventHandler(this.Anyvalue_changed);
             // 
             // label7
             // 

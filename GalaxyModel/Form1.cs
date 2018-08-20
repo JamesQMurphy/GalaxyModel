@@ -59,9 +59,9 @@ namespace GalaxyModel
             // Glean values from form
             boxRadius = (double)this.numResolution.Value / 2.0;
             double.TryParse(txtWs.Text, out ws);
-            galaxyRadius = (double)boxRadius / 2.0;
+            galaxyRadius = (double)tbSpiralRadius.Value;
             galaxyHeight = galaxyRadius / 10.0;
-            bulgeRadius = (double)galaxyRadius * 5.0;
+            bulgeRadius = (double)tbBulgeRadius.Value;
             Ls = (double)tbSpiralBrightness.Value;
             Lb = (double)tbBulgeBrightness.Value;
             m = (int)numArms.Value;
